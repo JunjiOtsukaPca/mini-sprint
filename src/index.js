@@ -1,0 +1,1 @@
+ReactDOM.render(<App getInformation={window.getInformation}/>, document.getElementById('app'));

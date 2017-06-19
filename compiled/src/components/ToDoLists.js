@@ -1,0 +1,12 @@
+"use strict";
+
+var ToDoLists = function ToDoLists(props) {
+  return React.createElement(
+    "div",
+    null,
+    React.createElement(ToDoList, null)
+  );
+};
+
+window.ToDoLists = ToDoLists;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9jb21wb25lbnRzL1RvRG9MaXN0cy5qc3giXSwibmFtZXMiOlsiVG9Eb0xpc3RzIiwicHJvcHMiLCJ3aW5kb3ciXSwibWFwcGluZ3MiOiI7O0FBQUEsSUFBSUEsWUFBWSxTQUFaQSxTQUFZLENBQUNDLEtBQUQ7QUFBQSxTQUNkO0FBQUE7QUFBQTtBQUNFLHdCQUFDLFFBQUQ7QUFERixHQURjO0FBQUEsQ0FBaEI7O0FBT0FDLE9BQU9GLFNBQVAsR0FBbUJBLFNBQW5CIiwiZmlsZSI6IlRvRG9MaXN0cy5qcyIsInNvdXJjZXNDb250ZW50IjpbInZhciBUb0RvTGlzdHMgPSAocHJvcHMpID0+IChcclxuICA8ZGl2PlxyXG4gICAgPFRvRG9MaXN0XHJcbiAgICAvPlxyXG4gIDwvZGl2PlxyXG4pXHJcblxyXG53aW5kb3cuVG9Eb0xpc3RzID0gVG9Eb0xpc3RzOyJdfQ==
