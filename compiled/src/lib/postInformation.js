@@ -1,0 +1,26 @@
+'use strict';
+
+var postInformation = function postInformation(_ref, callback) {
+  var toDo = _ref.toDo,
+      toDoId = _ref.toDoId;
+
+  $.post('http://127.0.0.1:8080/api/posts', {
+    toDo: toDo,
+    toDoId: toDoId
+  }).done(function (_ref2) {
+    var items = _ref2.items;
+
+    if (callback) {
+      callback(items);
+    }
+  }).fail(function (_ref3) {
+    var responseJSON = _ref3.responseJSON;
+
+    responseJSON.error.errors.forEach(function (err) {
+      return console.error;
+    });
+  });
+};
+
+window.postInformation = postInformation;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9saWIvcG9zdEluZm9ybWF0aW9uLmpzIl0sIm5hbWVzIjpbInBvc3RJbmZvcm1hdGlvbiIsImNhbGxiYWNrIiwidG9EbyIsInRvRG9JZCIsIiQiLCJwb3N0IiwiZG9uZSIsIml0ZW1zIiwiZmFpbCIsInJlc3BvbnNlSlNPTiIsImVycm9yIiwiZXJyb3JzIiwiZm9yRWFjaCIsImVyciIsImNvbnNvbGUiLCJ3aW5kb3ciXSwibWFwcGluZ3MiOiI7O0FBQUEsSUFBSUEsa0JBQWtCLFNBQWxCQSxlQUFrQixPQUFpQkMsUUFBakIsRUFBOEI7QUFBQSxNQUE1QkMsSUFBNEIsUUFBNUJBLElBQTRCO0FBQUEsTUFBdEJDLE1BQXNCLFFBQXRCQSxNQUFzQjs7QUFDbERDLElBQUVDLElBQUYsQ0FBTyxpQ0FBUCxFQUEwQztBQUN4Q0gsVUFBTUEsSUFEa0M7QUFFeENDLFlBQVFBO0FBRmdDLEdBQTFDLEVBSUNHLElBSkQsQ0FJTyxpQkFBYTtBQUFBLFFBQVhDLEtBQVcsU0FBWEEsS0FBVzs7QUFDbEIsUUFBSU4sUUFBSixFQUFjO0FBQ1pBLGVBQVNNLEtBQVQ7QUFDRDtBQUNGLEdBUkQsRUFTQ0MsSUFURCxDQVNNLGlCQUFvQjtBQUFBLFFBQWxCQyxZQUFrQixTQUFsQkEsWUFBa0I7O0FBQ3hCQSxpQkFBYUMsS0FBYixDQUFtQkMsTUFBbkIsQ0FBMEJDLE9BQTFCLENBQWtDLFVBQUNDLEdBQUQ7QUFBQSxhQUFTQyxRQUFRSixLQUFqQjtBQUFBLEtBQWxDO0FBQ0QsR0FYRDtBQVlELENBYkQ7O0FBZUFLLE9BQU9mLGVBQVAsR0FBeUJBLGVBQXpCIiwiZmlsZSI6InBvc3RJbmZvcm1hdGlvbi5qcyIsInNvdXJjZXNDb250ZW50IjpbInZhciBwb3N0SW5mb3JtYXRpb24gPSAoe3RvRG8sIHRvRG9JZH0sIGNhbGxiYWNrKSA9PiB7XHJcbiAgJC5wb3N0KCdodHRwOi8vMTI3LjAuMC4xOjgwODAvYXBpL3Bvc3RzJywge1xyXG4gICAgdG9EbzogdG9EbyxcclxuICAgIHRvRG9JZDogdG9Eb0lkLFxyXG4gIH0pXHJcbiAgLmRvbmUgKCh7aXRlbXN9KSA9PiB7XHJcbiAgICBpZiAoY2FsbGJhY2spIHtcclxuICAgICAgY2FsbGJhY2soaXRlbXMpO1xyXG4gICAgfVxyXG4gIH0pXHJcbiAgLmZhaWwoKHtyZXNwb25zZUpTT059KSA9PiB7XHJcbiAgICByZXNwb25zZUpTT04uZXJyb3IuZXJyb3JzLmZvckVhY2goKGVycikgPT4gY29uc29sZS5lcnJvcik7XHJcbiAgfSk7XHJcbn07XHJcblxyXG53aW5kb3cucG9zdEluZm9ybWF0aW9uID0gcG9zdEluZm9ybWF0aW9uO1xyXG4iXX0=

@@ -32,7 +32,7 @@ class App extends React.Component {
     return (
       <div>
         <ToDoLists
-          getToDoList={this.getToDoList.bing(this)}
+          getToDoList={this.getToDoList.bind(this)}
           lists={this.state.currList}
         />
         <div>
