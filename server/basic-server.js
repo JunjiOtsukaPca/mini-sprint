@@ -39,6 +39,42 @@ app.post('/api/posts', function(req, res){
   //after
 })
 
+app.route('/api/posts/:id') // :id will be replaced
+  .get(function(req, res) {
+  //req.params for :id number
+    List.find({id: req.params.id}, function(err, list) {
+      if (err) {
+        res.status(201).send(err);
+      } else {
+        res.status(200).send(list);
+      }
+    })
+  })
+  .put(function(req, res){
+    List.find({id: req.params.id}, function(err, list) {
+      if (err) {
+        res.status(201).send(err);
+      } else {
+        list.id = req.body.toDo;
+        res.status(200).send(list);
+      }
+    })
+  })
+  .delete(function(req, res){
+    List.find({id: req.params.id}).remove(function(err, toDo){
+      if (err) {
+        res.status(201).send(err);
+      } else {
+        res.status(200).send(toDo);
+      }
+    })
+  })
+
+//listening to port 8080
+app.listen(8080, function() {
+  console.log('Listening to port 8080!')
+})
+
 //grab all posts, or post a message
 // app.route('/api/posts')
 //   .get(function(req, res) {
@@ -72,41 +108,6 @@ app.post('/api/posts', function(req, res){
 //   })
 
 //grab by id, post by id, delete by id
-app.route('/api/posts/:id') // :id will be replaced
-  .get(function(req, res) {
-  //req.params for :id number
-    List.find({id: req.param('id')}, function(err, list) {
-      if (err) {
-        res.status(201).send(err);
-      } else {
-        res.status(200).send(list);
-      }
-    })
-  })
-  .put(function(req, res){
-    List.find({id: req.param(id)}, function(err, list) {
-      if (err) {
-        res.status(201).send(err);
-      } else {
-        list.id = req.body.toDo;
-        res.status(200).send(list);
-      }
-    })
-  })
-  .delete(function(req, res){
-    List.find({id: req.param(id)}).remove(function(err, toDo){
-      if (err) {
-        res.status(201).send(err);
-      } else {
-        res.status(200).send(toDo);
-      }
-    })
-  })
-
-//listening to port 8080
-app.listen(8080, function() {
-  console.log('Listening to port 8080!')
-})
 
 // var port = 8080;
 

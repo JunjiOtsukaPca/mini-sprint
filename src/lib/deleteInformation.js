@@ -5,7 +5,7 @@ var deleteInformation = ({toDo, toDoId}, callback) => {
     data: {
       toDo: toDo,
       toDoId: toDoId,
-    }
+    },
     success: function(data) {
       if (callback) {
         callback(data);
