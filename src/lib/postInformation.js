@@ -1,8 +1,7 @@
 var postInformation = ({toDo}, callback) => {
-  $.post('http://127.0.0.1:8080/api/posts', {toDo: toDo})
-  .done (({items}) => {
+  $.post('http://127.0.0.1:8080/api/posts', {toDo: toDo}, ((data) => {
     if (callback) {
-      callback(items);
+      callback(data);
     }
   })
   .fail((err) => {

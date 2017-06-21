@@ -9,9 +9,7 @@ var app = express();
 
 var List = require('./db/database');
 
-//grab all posts, or post a message
-app.route('/api/posts')
-  .get(function(req, res) {
+app.get('/api/posts', function(req, res) {
     //call to the database
     //res.send(database)
     List.find({}).exec(function(err, list){
@@ -22,23 +20,56 @@ app.route('/api/posts')
       }
     })
   })
-  .post(function(req, res){
-    var list = new List({toDo: req.body.toDo});
-    //list.save
-    //pass in a callback function
-    list.save(function (err, list) {
-      if (err) { //if error, res.send(201)
-        res.status(201).send(err);
-      } else { //if no send back a new list.
-      //good practice is to send back posted database;
-      //res.send ()
-        res.status(200).send(list);
-      }
-    })
-    //req.body ... req.data
-    //export database to database
-    //after
+app.post('/api/posts', function(req, res){
+  var list = new List({toDo: req.body});
+  //list.save
+  //pass in a callback function
+  list.save(function (err, list) {
+    if (err) { //if error, res.send(201)
+      console.log(req.body)
+      res.status(201).send(err);
+    } else { //if no send back a new list.
+    //good practice is to send back posted database;
+    //res.send ()
+      res.status(200).send(list);
+    }
   })
+  //req.body ... req.data
+  //export database to database
+  //after
+})
+
+//grab all posts, or post a message
+// app.route('/api/posts')
+//   .get(function(req, res) {
+//     //call to the database
+//     //res.send(database)
+//     List.find({}).exec(function(err, list){
+//       if (err) {
+//         res.status(201).send(err);
+//       } else {
+//         res.status(200).send(list)
+//       }
+//     })
+//   })
+//   .post(function(req, res){
+//     var list = new List({toDo: req.body.toDo});
+//     //list.save
+//     //pass in a callback function
+//     list.save(function (err, list) {
+//       if (err) { //if error, res.send(201)
+//         console.log(req.body)
+//         res.status(201).send(err);
+//       } else { //if no send back a new list.
+//       //good practice is to send back posted database;
+//       //res.send ()
+//         res.status(200).send(list);
+//       }
+//     })
+//     //req.body ... req.data
+//     //export database to database
+//     //after
+//   })
 
 //grab by id, post by id, delete by id
 app.route('/api/posts/:id') // :id will be replaced

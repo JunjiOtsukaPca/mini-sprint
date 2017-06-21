@@ -4,6 +4,7 @@ var ToDoLists = (props) => (
       <ToDoList
         getToDoList={props.getToDoList}
         list={list}
+        deleteToDoList={props.deleteToDoList}
       />
     )}
   </div>

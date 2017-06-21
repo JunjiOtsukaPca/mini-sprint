@@ -1,16 +1,33 @@
 var deleteInformation = ({toDo, toDoId}, callback) => {
-  $.delete(`http://127.0.0.1:8080/api/posts/${toDoId}`, {
-    toDo: toDo,
-    toDoId: toDoId,
-  })
-  .done (({items}) => {
-    if (callback) {
-      callback(items);
+  $.ajax({
+    url: `http://127.0.0.1:8080/api/posts/${toDoId}`,
+    type: 'DELETE',
+    data: {
+      toDo: toDo,
+      toDoId: toDoId,
+    }
+    success: function(data) {
+      if (callback) {
+        callback(data);
+      }
+    },
+    failure: function(err) {
+      console.log(err);
     }
   })
-  .fail(({responseJSON}) => {
-    responseJSON.error.errors.forEach((err) => console.error);
-  });
+
+  // $.delete(`http://127.0.0.1:8080/api/posts/${toDoId}`, {
+  //   toDo: toDo,
+  //   toDoId: toDoId,
+  // })
+  // .done (({items}) => {
+  //   if (callback) {
+  //     callback(items);
+  //   }
+  // })
+  // .fail((err) => {
+  //   console.log('error', err);
+  // });
 };
 
 window.deleteInformation = deleteInformation;

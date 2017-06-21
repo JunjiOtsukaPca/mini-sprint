@@ -1,7 +1,6 @@
 class App extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.state = {
       // currList: window.globalList,
       currList: [
@@ -23,7 +22,7 @@ class App extends React.Component {
     $('.submitList').val('');
   }
 
-  getToDoList(toDo) {
+  getToDoList() {
     var options = {
       toDo: toDo
     }
@@ -34,9 +33,9 @@ class App extends React.Component {
       )
   }
 
-  postToDoList(toDo) {
+  postToDoList() {
     var options = {
-      toDo: toDo
+      toDo: this.state.currList
     }
     this.props.postInformation(options, (list) =>
         this.setState({
@@ -61,6 +60,7 @@ class App extends React.Component {
       <div>
         <ToDoLists
           getToDoList={this.getToDoList.bind(this)}
+          deleteToDoList={this.deleteToDoList.bind(this)}
           lists={this.state.currList}
         />
         <div>
