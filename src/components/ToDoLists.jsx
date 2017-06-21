@@ -1,7 +1,11 @@
 var ToDoLists = (props) => (
   <div>
-    <ToDoList
-    />
+    {props.lists.map((list) =>
+      <ToDoList
+        getToDoList={props.getToDoList}
+        list={list}
+      />
+    )}
   </div>
 )
 

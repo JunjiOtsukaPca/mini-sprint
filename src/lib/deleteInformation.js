@@ -15,5 +15,5 @@ var deleteInformation = ({toDo, toDoId}, callback) => {
 
 window.deleteInformation = deleteInformation;
 
-
-.get(`/api/chefs/${id}`);
+//how to use back ticks in ajax
+// .get(`/api/chefs/${id}`);

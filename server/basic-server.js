@@ -44,16 +44,16 @@ app.route('/api/posts')
 app.route('/api/posts/:id') // :id will be replaced
   .get(function(req, res) {
   //req.params for :id number
-    List.find({id: req.params.id}, function(err, list) {
+    List.find({id: req.param('id')}, function(err, list) {
       if (err) {
         res.status(201).send(err);
       } else {
-        res.status(200).send(list)
+        res.status(200).send(list);
       }
     })
   })
   .put(function(req, res){
-    List.find({id: req.body.id}, function(err, list) {
+    List.find({id: req.param(id)}, function(err, list) {
       if (err) {
         res.status(201).send(err);
       } else {
@@ -63,11 +63,10 @@ app.route('/api/posts/:id') // :id will be replaced
     })
   })
   .delete(function(req, res){
-    List.find({id: req.body.id}, function(err, toDo){
+    List.find({id: req.param(id)}).remove(function(err, toDo){
       if (err) {
         res.status(201).send(err);
       } else {
-        delete toDo;
         res.status(200).send(toDo);
       }
     })

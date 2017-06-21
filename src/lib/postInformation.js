@@ -5,8 +5,8 @@ var postInformation = ({toDo}, callback) => {
       callback(items);
     }
   })
-  .fail(({responseJSON}) => {
-    responseJSON.error.errors.forEach((err) => console.error);
+  .fail((err) => {
+    console.log(err)
   });
 };
 

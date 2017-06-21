@@ -4,12 +4,18 @@ class App extends React.Component {
     console.log(props)
     this.state = {
       // currList: window.globalList,
-      currList: '',
+      currList: [
+        'car',
+        'cat',
+        'cam'
+      ],
     }
   }
+
   changeCurrList(list) {
     this.setState({currList: list});
   }
+
   clickCurrList() {
     //append this new list to the DOM
     var $li = $('<li>'+this.state.currList+'</li>');
@@ -28,6 +34,28 @@ class App extends React.Component {
       )
   }
 
+  postToDoList(toDo) {
+    var options = {
+      toDo: toDo
+    }
+    this.props.postInformation(options, (list) =>
+        this.setState({
+          currList: list,
+        })
+      )
+  }
+
+  deleteToDoList(toDo) {
+    var options = {
+      toDo: toDo
+    }
+    this.props.deleteInformation(options, (list) =>
+        this.setState({
+          currList: list,
+        })
+      )
+  }
+
   render () {
     return (
       <div>
@@ -39,6 +67,7 @@ class App extends React.Component {
           <ToDoTextBox
             changeCurrList={this.changeCurrList.bind(this)}
             clickCurrList={this.clickCurrList.bind(this)}
+            postToDoList={this.postToDoList.bind(this)}
           />
         </div>
       </div>
@@ -46,6 +75,7 @@ class App extends React.Component {
     )
   }
 }
+window.App = App;
       // </div>
         // <div>
         //   I am here
@@ -53,7 +83,6 @@ class App extends React.Component {
         // <div>
         //   <ToDoList />
         // </div>
-window.App = App;
 // <div>
 //   <Nav handleSearchInputChange={this.getYoutubeVideos.bind(this)}
 //   />
