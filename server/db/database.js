@@ -13,7 +13,7 @@ db.once('open', function(){
 
 //create a schema here
 var listSchema = Schema({
-  toDo: String
+  toDo: String //
 })
 
 var List = mongoose.model('List', listSchema);

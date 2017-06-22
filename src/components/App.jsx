@@ -4,69 +4,73 @@ class App extends React.Component {
     this.state = {
       // currList: window.globalList,
       currList: [
-        'car',
-        'cat',
-        'cam'
+        // 'car',
+        // 'cat',
+        // 'cam'
       ],
+      searchValue: ''
     }
   }
 
-  changeCurrList(list) {
-    this.setState({currList: list});
-  }
+  componentDidMount() {
+    console.log('page loaded')
 
-  clickCurrList() {
-    //append this new list to the DOM
-    var $li = $('<li>'+this.state.currList+'</li>');
-    $('#doList').append($li);
-    $('.submitList').val('');
-  }
-
-  getToDoList() {
-    var options = {
-      toDo: toDo
-    }
-    this.props.getInformation(options, (list) =>
+    this.props.getInformation((list) => {
+      // var newList = list.map((object) => object.toDo);
         this.setState({
           currList: list,
         })
-      )
+      })
   }
+  //this is changing to strings
+  changeCurrList(list) {
+    console.log(list)
+    this.setState({searchValue: list});
+  }
+
 
   postToDoList() {
     var options = {
-      toDo: this.state.currList
+      toDo: this.state.searchValue
     }
-    this.props.postInformation(options, (list) =>
+    // var context = this
+    this.props.postInformation(options, (list) => {
+        this.state.currList.push(list.toDo)
+        var newlist = this.state.currList
         this.setState({
-          currList: list,
+          currList: newlist,
         })
-      )
+    } )
   }
 
-  deleteToDoList(toDo) {
+  deleteToDoList(toDo, toDoId) {
+    console.log(toDo, toDoId)
     var options = {
-      toDo: toDo
+      toDo: toDo,
+      toDoId: toDoId
     }
-    this.props.deleteInformation(options, (list) =>
-        this.setState({
-          currList: list,
+    this.props.deleteInformation(options, (list) => {
+      console.log('succesfullly dleeted')
+        //   this.props.getInformation((list) => {
+        // // var newList = list.map((object) => object.toDo);
+        //   this.setState({
+        //     currList: list,
+        //   })
         })
-      )
+      // )
+    }
   }
 
   render () {
     return (
       <div>
         <ToDoLists
-          getToDoList={this.getToDoList.bind(this)}
           deleteToDoList={this.deleteToDoList.bind(this)}
           lists={this.state.currList}
         />
         <div>
           <ToDoTextBox
             changeCurrList={this.changeCurrList.bind(this)}
-            clickCurrList={this.clickCurrList.bind(this)}
             postToDoList={this.postToDoList.bind(this)}
           />
         </div>

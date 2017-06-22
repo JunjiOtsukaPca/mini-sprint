@@ -1,8 +1,9 @@
 var ToDoList = (props) => (
   <div>
     <ul id="doList">
-      <li>{props.list}</li>
-      <button onClick={props.deleteToDoList}>Remove This</button>
+      <div onClick={(e) => props.deleteToDoList(e.target.innerHTML, props.list._id)}>
+        <li>{props.list.toDo}</li>
+      </div>
     </ul>
   </div>
 )

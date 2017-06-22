@@ -4,7 +4,6 @@ var deleteInformation = ({toDo, toDoId}, callback) => {
     type: 'DELETE',
     data: {
       toDo: toDo,
-      toDoId: toDoId,
     },
     success: function(data) {
       if (callback) {

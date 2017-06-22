@@ -1,37 +1,43 @@
-var http = require('http');
-
-var messages = require('./request-handler');
-var utils = require('./util')
-var url = require('url');
-
 var express = require('express');
 var app = express();
 
+//bodyParser is a useful tool to retrieve req.body as an object.
+var bodyParser = require('body-parser');
+
 var List = require('./db/database');
+
+// these are required inside express.
+//tool kits to make express easier to use
+app.use(express.static(__dirname + '/../')); //index.html frontend
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/api/posts', function(req, res) {
     //call to the database
     //res.send(database)
-    List.find({}).exec(function(err, list){
+    List.find({}).exec(function(err, list) {
       if (err) {
-        res.status(201).send(err);
+        res.status(404).send(err);
       } else {
         res.status(200).send(list)
       }
     })
   })
 app.post('/api/posts', function(req, res){
-  var list = new List({toDo: req.body});
+
+  console.log(req.body.toDo)
+  var list = new List({toDo: req.body.toDo});
   //list.save
   //pass in a callback function
-  list.save(function (err, list) {
-    if (err) { //if error, res.send(201)
-      console.log(req.body)
-      res.status(201).send(err);
+  list.save(function (err, listFromDB) {
+    if (err) { //if error, res.send(404)
+  // console.log(req.body.toDo)
+      res.status(404).send(err);
     } else { //if no send back a new list.
     //good practice is to send back posted database;
     //res.send ()
-      res.status(200).send(list);
+      console.log(listFromDB  )
+      res.status(200).send(listFromDB);
     }
   })
   //req.body ... req.data
@@ -42,28 +48,27 @@ app.post('/api/posts', function(req, res){
 app.route('/api/posts/:id') // :id will be replaced
   .get(function(req, res) {
   //req.params for :id number
-    List.find({id: req.params.id}, function(err, list) {
+    List.findById(req.params.id, function(err, list) {
       if (err) {
-        res.status(201).send(err);
+        res.status(404).send(err);
       } else {
         res.status(200).send(list);
       }
     })
   })
   .put(function(req, res){
-    List.find({id: req.params.id}, function(err, list) {
+    List.findByIdAndUpdate(req.params.id, {toDo: req.body.toDo}, function(err, list) {
       if (err) {
-        res.status(201).send(err);
+        res.status(404).send(err);
       } else {
-        list.id = req.body.toDo;
         res.status(200).send(list);
       }
     })
   })
   .delete(function(req, res){
-    List.find({id: req.params.id}).remove(function(err, toDo){
+    List.findByIdAndRemove(req.params.id, function(err, toDo){
       if (err) {
-        res.status(201).send(err);
+        res.status(404).send(err);
       } else {
         res.status(200).send(toDo);
       }
@@ -73,7 +78,7 @@ app.route('/api/posts/:id') // :id will be replaced
 //listening to port 8080
 app.listen(8080, function() {
   console.log('Listening to port 8080!')
-})
+});
 
 //grab all posts, or post a message
 // app.route('/api/posts')
@@ -82,7 +87,7 @@ app.listen(8080, function() {
 //     //res.send(database)
 //     List.find({}).exec(function(err, list){
 //       if (err) {
-//         res.status(201).send(err);
+//         res.status(404).send(err);
 //       } else {
 //         res.status(200).send(list)
 //       }
@@ -93,7 +98,7 @@ app.listen(8080, function() {
 //     //list.save
 //     //pass in a callback function
 //     list.save(function (err, list) {
-//       if (err) { //if error, res.send(201)
+//       if (err) { //if error, res.send(404)
 //         console.log(req.body)
 //         res.status(201).send(err);
 //       } else { //if no send back a new list.

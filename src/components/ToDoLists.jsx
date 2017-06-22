@@ -1,5 +1,6 @@
 var ToDoLists = (props) => (
   <div>
+  {console.log(props.lists)}
     {props.lists.map((list) =>
       <ToDoList
         getToDoList={props.getToDoList}
