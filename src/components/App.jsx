@@ -12,16 +12,18 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount() {
-    console.log('page loaded')
-
+  getAll() {
     this.props.getInformation((list) => {
-      // var newList = list.map((object) => object.toDo);
-        this.setState({
-          currList: list,
-        })
+      this.setState({
+        currList: list,
       })
+    })
   }
+
+  componentDidMount() {
+    this.getAll();
+  }
+
   //this is changing to strings
   changeCurrList(list) {
     console.log(list)
@@ -33,32 +35,23 @@ class App extends React.Component {
     var options = {
       toDo: this.state.searchValue
     }
-    // var context = this
     this.props.postInformation(options, (list) => {
-        this.state.currList.push(list.toDo)
-        var newlist = this.state.currList
-        this.setState({
-          currList: newlist,
-        })
-    } )
+      this.state.currList.push(list)
+      var newlist = this.state.currList;
+      this.setState({
+        currList: newlist,
+      })
+    })
   }
 
   deleteToDoList(toDo, toDoId) {
-    console.log(toDo, toDoId)
     var options = {
       toDo: toDo,
       toDoId: toDoId
     }
     this.props.deleteInformation(options, (list) => {
-      console.log('succesfullly dleeted')
-        //   this.props.getInformation((list) => {
-        // // var newList = list.map((object) => object.toDo);
-        //   this.setState({
-        //     currList: list,
-        //   })
-        })
-      // )
-    }
+      this.getAll();
+    })
   }
 
   render () {

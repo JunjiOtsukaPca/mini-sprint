@@ -36,7 +36,7 @@ app.post('/api/posts', function(req, res){
     } else { //if no send back a new list.
     //good practice is to send back posted database;
     //res.send ()
-      console.log(listFromDB  )
+      console.log('list', listFromDB)
       res.status(200).send(listFromDB);
     }
   })
